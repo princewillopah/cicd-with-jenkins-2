@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        node {
+            label 'maven'
+        }
+    }
+    environment {
+        M2_HOME = '/opt/apache-maven-3.9.6'  // Update this with your Maven installation path
+        PATH = "$M2_HOME/bin:$PATH"
+    }
+    stages {
+        stage('Preparing to build') {
+            steps {
+                echo "Preparing to build the Java app!!"
+            }
+        }
+
+        stage('Building maven projects') {
+            steps {
+                sh 'mvn clean deploy'
+                echo 'Successful builds'
+            }
+        }
+    }
+}
